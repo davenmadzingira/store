@@ -1,5 +1,4 @@
 import type { Profile, AffiliateConversion } from '@/types/database'
-import type { Profile } from '@/types/database'
 import { createClient } from '@/lib/supabase/server'
 import { formatPrice, formatDate } from '@/lib/utils'
 import { CopyLinkButton } from '@/components/shop/copy-link-button'

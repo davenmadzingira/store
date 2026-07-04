@@ -7,7 +7,7 @@ export default async function AffiliateDashboardPage() {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
-const { data: conversionsData } = await supabase
+const conversionsData = await supabase
   .from('affiliate_conversions')
   .select('*')
   .eq('affiliate_code', profile?.affiliate_code || '')

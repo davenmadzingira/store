@@ -21,7 +21,7 @@ const { data: profile } = await supabase
   const { data: conversions } = await supabase
     .from('affiliate_conversions')
     .select('*')
-    .eq('affiliate_code', profile?.affiliate_code || '')
+    .eq('referred_by_code', profile?.affiliate_code || '')
     .order('created_at', { ascending: false })
 
   const totalCommissionCents = (conversions || []).reduce((sum, c) => sum + c.commission_cents, 0)

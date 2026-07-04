@@ -28,10 +28,10 @@ const { data: conversionsData } = await supabase
 
 const conversions = conversionsData as any
 
-  const totalCommissionCents = (conversions || []).reduce((sum, c) => sum + c.commission_cents, 0)
-  const paidCommissionCents = (conversions || [])
-    .filter((c) => c.status === 'paid')
-    .reduce((sum, c) => sum + c.commission_cents, 0)
+  const totalCommissionCents = (conversions || []).reduce((sum: number, c: any) => sum + c.commission_cents, 0)
+const paidCommissionCents = (conversions || [])
+  .filter((c: any) => c.status === 'paid')
+  .reduce((sum: number, c: any) => sum + c.commission_cents, 0)
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || ''
   const referralLink = `${siteUrl}/?ref=${profile?.affiliate_code}`

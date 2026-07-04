@@ -1,21 +1,23 @@
+import type { Profile } from '@/types/database'
 import { createClient } from '@/lib/supabase/server'
 
 export default async function AccountOverviewPage() {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
-  const { data: profile } = await supabase
+  const { data: profileData } = await supabase
     .from('profiles')
     .select('*')
     .eq('id', user!.id)
     .single()
+
+  const profile = profileData as any
 
   const { count: orderCount } = await supabase
     .from('orders')
     .select('id', { count: 'exact', head: true })
     .eq('user_id', user!.id)
     .eq('status', 'paid')
-
   return (
     <div>
       <h1 className="border-b border-ink-900 pb-4 font-display text-2xl text-ink-900">

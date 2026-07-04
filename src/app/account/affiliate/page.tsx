@@ -15,11 +15,6 @@ const conversionsData = await supabase
 
 const conversions = conversionsData as any
 
-  const { count: clickCount } = await supabase
-    .from('affiliate_clicks')
-    .select('id', { count: 'exact', head: true })
-   .eq('referred_by_code', profile?.affiliate_code || '')
-
  const { data: conversions } = await supabase
   .from('affiliate_conversions')
   .select('*')

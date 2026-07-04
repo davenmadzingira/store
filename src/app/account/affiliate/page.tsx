@@ -1,3 +1,4 @@
+import type { Profile } from '@/types/database'
 import { createClient } from '@/lib/supabase/server'
 import { formatPrice, formatDate } from '@/lib/utils'
 import { CopyLinkButton } from '@/components/shop/copy-link-button'
@@ -6,11 +7,11 @@ export default async function AffiliateDashboardPage() {
   const supabase = createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('affiliate_code')
-    .eq('id', user!.id)
-    .single()
+const { data: profile } = await supabase
+  .from('profiles')
+  .select('*')
+  .eq('id', user.id)
+  .single<Profile>()
 
   const { count: clickCount } = await supabase
     .from('affiliate_clicks')
